@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "1055727481758",
+    "project_id": "carrental-2ce8d",
+    "storage_bucket": "carrental-2ce8d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1055727481758:android:c5d5e85a14b687e5671c8f",
+        "android_client_info": {
+          "package_name": "car_rental.lib"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXOSiVTLMUqCXMNile_o9HF6BsGH3zJBc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1055727481758:android:714f7b5332fc28a6671c8f",
+        "android_client_info": {
+          "package_name": "com.example.car_rental"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXOSiVTLMUqCXMNile_o9HF6BsGH3zJBc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1055727481758:android:1cf2c762af23dcb5671c8f",
+        "android_client_info": {
+          "package_name": "com.nhatnguyen.car_rental"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXOSiVTLMUqCXMNile_o9HF6BsGH3zJBc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
