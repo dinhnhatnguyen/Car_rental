@@ -4,19 +4,20 @@ import 'package:car_rental/presentation/widgets/car_card.dart';
 import 'package:car_rental/presentation/widgets/more_card.dart';
 import 'package:flutter/material.dart';
 
-class CarDetailsPage extends StatefulWidget {
-  final Car  car;
-  const CarDetailsPage({super.key, required this.car});
+class CardDetailsPage extends StatefulWidget {
+  final Car car;
+
+  const CardDetailsPage({super.key, required this.car});
 
   @override
-  State<CarDetailsPage> createState() => _CarDetailsPageState();
+  State<CardDetailsPage> createState() => _CardDetailsPageState();
 }
 
-class _CarDetailsPageState extends State<CarDetailsPage> with SingleTickerProviderStateMixin {
-
+class _CardDetailsPageState extends State<CardDetailsPage> with SingleTickerProviderStateMixin {
   AnimationController? _controller;
   Animation<double>? _animation;
 
+  @override
   void initState() {
     _controller = AnimationController(
         duration: const Duration(seconds: 3),
@@ -52,7 +53,7 @@ class _CarDetailsPageState extends State<CarDetailsPage> with SingleTickerProvid
       ),
       body: Column(
         children: [
-          CarCard(car: Car (model: widget.car.model, distance: widget.car.distance, fuelCapacity: widget.car.fuelCapacity, pricePerHour: widget.car.pricePerHour)),
+          CarCard(car: Car(model: widget.car.model, distance: widget.car.distance, fuelCapacity: widget.car.fuelCapacity, pricePerHour: widget.car.pricePerHour)),
           SizedBox(height: 20,),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -111,7 +112,6 @@ class _CarDetailsPageState extends State<CarDetailsPage> with SingleTickerProvid
                           child: Image.asset('assets/maps.png',fit: BoxFit.cover,),
                         ),
                       ),
-
                     ),
                   ),
                 )

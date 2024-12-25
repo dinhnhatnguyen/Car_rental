@@ -14,16 +14,16 @@ class CarCard extends StatelessWidget {
       onTap: (){
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => CarDetailsPage(car: car))
+            MaterialPageRoute(builder: (context) => CardDetailsPage(car: car,))
         );
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        padding: const EdgeInsets.all(20),
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        padding: EdgeInsets.all(20),
         decoration: BoxDecoration(
-            color: const Color(0xffF3F3F3),
+            color: Color(0xffF3F3F3),
             borderRadius: BorderRadius.circular(20),
-            boxShadow: const [
+            boxShadow: [
               BoxShadow(
                   color: Colors.black12,
                   blurRadius: 10,
@@ -34,8 +34,8 @@ class CarCard extends StatelessWidget {
         child: Column(
           children: [
             Image.asset('assets/car_image.png', height: 120,),
-            Text(car.model, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-            const SizedBox(height: 10,),
+            Text(car.model, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+            SizedBox(height: 10,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -57,7 +57,7 @@ class CarCard extends StatelessWidget {
                 ),
                 Text(
                   '\$${car.pricePerHour.toStringAsFixed(2)}/h',
-                  style: const TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 16),
                 )
               ],
             )
