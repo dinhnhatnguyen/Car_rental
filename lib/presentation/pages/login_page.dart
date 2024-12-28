@@ -164,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    User? user = await _auth.signInWithEmailAndPassword(email, password);
+    User? user = await _auth.signInWithEmailAndPassword(context,email, password);
 
     setState(() {
       _isSigning = false;
@@ -173,7 +173,8 @@ class _LoginPageState extends State<LoginPage> {
     if (user != null) {
       showToast(
           message: "User is successfully signed in",
-          type: ToastType.success
+          type: ToastType.success,
+          context: context
       );
       Navigator.pushAndRemoveUntil(
         context,
@@ -183,7 +184,8 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       showToast(
           message: "Some error occurred",
-          type: ToastType.error
+          type: ToastType.error,
+          context: context
       );
     }
   }

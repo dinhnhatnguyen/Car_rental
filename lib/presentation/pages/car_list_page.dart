@@ -52,7 +52,7 @@ class CarListScreen extends StatelessWidget {
                         leading: Icon(Icons.logout),
                         title: Text('Logout'),
                         onTap: () async {
-                          await _authService.signOut();
+                          await _authService.signOut(context);
                           Navigator.pop(context); // Close drawer
                         },
                       ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
-enum ToastType { success, error, info , warning}
+enum ToastType { success, error, info, warning }
 
 void showToast({
   required String message,
+  required BuildContext context,
   ToastType type = ToastType.info,
 }) {
   Color backgroundColor;
@@ -31,16 +31,49 @@ void showToast({
       break;
   }
 
+  final overlay = Overlay.of(context);
+  OverlayEntry overlayEntry;
 
-
-  Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 2,
-      backgroundColor: backgroundColor,
-      textColor: textColor,
-      fontSize: 16.0
+  overlayEntry = OverlayEntry(
+    builder: (context) => Positioned(
+      bottom: 50,
+      left: 16,
+      right: 16,
+      child: Material(
+        color: Colors.transparent,
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: Offset(0, 2),
+                blurRadius: 4,
+              )
+            ],
+          ),
+          child: Row(
+            children: [
+              Icon(icon, color: textColor),
+              SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  message,
+                  style: TextStyle(color: textColor),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
   );
-}
 
+  overlay.insert(overlayEntry);
+  Future.delayed(Duration(seconds: 2), () {
+    overlayEntry.remove();
+  });
+}

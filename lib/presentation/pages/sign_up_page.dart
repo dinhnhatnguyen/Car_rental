@@ -5,6 +5,7 @@ import '../../service/auth_service.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/form_container.dart';
 import '../widgets/show_toast.dart';
+import 'car_list_page.dart';
 import 'login_page.dart';
 
 
@@ -149,7 +150,7 @@ class _SignUpPageState extends State<SignUpPage> {
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    User? user = await _auth.signUpWithEmailAndPassword(email, password);
+    User? user = await _auth.signUpWithEmailAndPassword(context ,email, password);
 
     setState(() {
       isSigningUp = false;
@@ -158,13 +159,19 @@ class _SignUpPageState extends State<SignUpPage> {
     if (user != null) {
       showToast(
           message: "User is successfully created",
-          type: ToastType.success
+          type: ToastType.success,
+          context: context
       );
-      Navigator.pushNamed(context, "/home");
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => CarListScreen()),
+            (route) => false,
+      );
     } else {
       showToast(
           message: "Error creating account",
-          type: ToastType.error
+          type: ToastType.error,
+          context: context
       );
     }
   }
