@@ -42,7 +42,9 @@ class _CardDetailsPageState extends State<CardDetailsPage> with SingleTickerProv
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -53,7 +55,7 @@ class _CardDetailsPageState extends State<CardDetailsPage> with SingleTickerProv
       ),
       body: Column(
         children: [
-          CarCard(car: Car(model: widget.car.model, distance: widget.car.distance, fuelCapacity: widget.car.fuelCapacity, pricePerHour: widget.car.pricePerHour)),
+          CarCard(car: Car(model: widget.car.model, distance: widget.car.distance, fuelCapacity: widget.car.fuelCapacity, pricePerHour: widget.car.pricePerHour, imageUrl: widget.car.imageUrl)),
           SizedBox(height: 20,),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -122,11 +124,11 @@ class _CardDetailsPageState extends State<CardDetailsPage> with SingleTickerProv
             padding: EdgeInsets.all(20),
             child: Column(
               children: [
-                MoreCard(car: Car(model: widget.car.model+"-1", distance: widget.car.distance+100, fuelCapacity: widget.car.fuelCapacity+100, pricePerHour: widget.car.pricePerHour+10)),
+                MoreCard(car: Car(model: widget.car.model+"-1", distance: widget.car.distance+100, fuelCapacity: widget.car.fuelCapacity+100, pricePerHour: widget.car.pricePerHour+10, imageUrl: widget.car.imageUrl)),
                 SizedBox(height: 5,),
-                MoreCard(car: Car(model: widget.car.model+"-2", distance: widget.car.distance+200, fuelCapacity: widget.car.fuelCapacity+200, pricePerHour: widget.car.pricePerHour+20)),
+                MoreCard(car: Car(model: widget.car.model+"-2", distance: widget.car.distance+200, fuelCapacity: widget.car.fuelCapacity+200, pricePerHour: widget.car.pricePerHour+20, imageUrl: widget.car.imageUrl)),
                 SizedBox(height: 5,),
-                MoreCard(car: Car(model: widget.car.model+"-3", distance: widget.car.distance+300, fuelCapacity: widget.car.fuelCapacity+300, pricePerHour: widget.car.pricePerHour+30)),
+                MoreCard(car: Car(model: widget.car.model+"-3", distance: widget.car.distance+300, fuelCapacity: widget.car.fuelCapacity+300, pricePerHour: widget.car.pricePerHour+30, imageUrl: widget.car.imageUrl)),
               ],
             ),
           )

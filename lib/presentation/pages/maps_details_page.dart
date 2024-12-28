@@ -174,7 +174,7 @@ class _MapsDetailsPageState extends State<MapsDetailsPage> {
           Positioned(
             top: 50,
             right: 20,
-            child: Image.asset('assets/white_car.png'),
+            child: Image.asset(widget.car.imageUrl, height: 125,),
           )
         ],
       ),
@@ -213,6 +213,7 @@ class _MapsDetailsPageState extends State<MapsDetailsPage> {
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
         child: Container(
+          color: Colors.white,
           padding: EdgeInsets.all(20),
           child: Form(
             key: _formKey,
