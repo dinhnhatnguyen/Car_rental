@@ -75,9 +75,9 @@ class _CardDetailsPageState extends State<CardDetailsPage> with SingleTickerProv
                     ),
                     child: Column(
                       children: [
-                        CircleAvatar(radius: 40, backgroundImage: AssetImage('assets/user.png'),),
+                        CircleAvatar(radius: 40, backgroundImage: AssetImage('assets/IMG_5472.jpeg'),),
                         SizedBox(height: 10,),
-                        Text('Jane Cooper',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text('Nhat Nguyen',style: TextStyle(fontWeight: FontWeight.bold),),
                         Text('\$4,253',style: TextStyle(color: Colors.grey),),
                       ],
                     ),

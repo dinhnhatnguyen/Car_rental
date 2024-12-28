@@ -1,9 +1,12 @@
 import 'package:car_rental/data/models/Car.dart';
 import 'package:car_rental/data/models/bookingInfor.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'login_page.dart';
 
 class MapsDetailsPage extends StatefulWidget {
   final Car car;
@@ -186,6 +189,22 @@ class _MapsDetailsPageState extends State<MapsDetailsPage> {
       return;
     }
 
+    User? currentUser = FirebaseAuth.instance.currentUser;
+
+    if (currentUser == null) {
+      // Nếu chưa đăng nhập, hiển thị thông báo và chuyển đến trang đăng nhập
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please login to book a car')),
+      );
+
+      // Chuyển đến trang đăng nhập
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      );
+      return;
+    }
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -290,23 +309,52 @@ class _MapsDetailsPageState extends State<MapsDetailsPage> {
         return;
       }
 
+      // Lấy thông tin người dùng hiện tại
+      User? currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser == null || currentUser.email == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: Unable to get user email')),
+        );
+        return;
+      }
+
       final booking = BookingInfo(
         customerName: _nameController.text,
         phoneNumber: _phoneController.text,
+        email: currentUser.email!, // Thêm email của người dùng
         deliveryTime: _selectedTime!,
         latitude: selectedLocation!.latitude,
         longitude: selectedLocation!.longitude,
+        // Car information
         carModel: widget.car.model,
+        carDistance: widget.car.distance,
+        carFuelCapacity: widget.car.fuelCapacity,
+        carPricePerHour: widget.car.pricePerHour,
       );
 
       try {
-        await FirebaseFirestore.instance
+        // Create a reference to booking_info collection
+        final bookingRef = await FirebaseFirestore.instance
             .collection('booking_info')
             .add(booking.toMap());
 
+        await FirebaseFirestore.instance
+            .collection('cars')
+            .where('model', isEqualTo: widget.car.model)
+            .get()
+            .then((QuerySnapshot querySnapshot) {
+          querySnapshot.docs.forEach((doc) {
+            doc.reference.update({
+              'isBooked': true,
+              'lastBookingId': bookingRef.id,
+              'lastBookingTime': DateTime.now().toIso8601String(),
+            });
+          });
+        });
+
         Navigator.pop(context); // Close the form
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Booking successfully!')),
+          SnackBar(content: Text('Booking submitted successfully!')),
         );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
