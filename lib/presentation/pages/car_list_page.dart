@@ -41,23 +41,31 @@ class CarListScreen extends StatelessWidget {
               stream: FirebaseAuth.instance.authStateChanges(),
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.data != null) {
-                  // User is logged in, show logout button
-                  return ListTile(
-                    leading: Icon(Icons.logout),
-                    title: Text('Logout'),
-                    onTap: () async {
-                      await _authService.signOut();
-                      Navigator.pop(context); // Đóng drawer
-                    },
+                  // User is logged in
+                  return Column(
+                    children: [
+                      ListTile(
+                        leading: Icon(Icons.person),
+                        title: Text(snapshot.data?.email ?? 'User'),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.logout),
+                        title: Text('Logout'),
+                        onTap: () async {
+                          await _authService.signOut();
+                          Navigator.pop(context); // Close drawer
+                        },
+                      ),
+                    ],
                   );
                 } else {
-                  // User is not logged in, show login button
+                  // User is not logged in
                   return ListTile(
                     leading: Icon(Icons.login),
                     title: Text('Login'),
                     onTap: () {
-                      Navigator.pop(context); // Đóng drawer
-                      Navigator.push(
+                      Navigator.pop(context); // Close drawer
+                      Navigator.pushReplacement( // Use pushReplacement instead of push
                         context,
                         MaterialPageRoute(
                           builder: (context) => LoginPage(),
@@ -72,7 +80,7 @@ class CarListScreen extends StatelessWidget {
               leading: Icon(Icons.history),
               title: Text('Booking History'),
               onTap: () {
-                Navigator.pop(context); // Đóng drawer
+                Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(

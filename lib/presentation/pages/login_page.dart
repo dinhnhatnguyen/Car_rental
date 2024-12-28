@@ -1,14 +1,10 @@
-// login_page.dart
+import 'package:car_rental/presentation/pages/car_list_page.dart';
 import 'package:car_rental/presentation/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
 import '../../service/auth_service.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/show_toast.dart';
-// Import your AuthService and other necessary files
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -20,7 +16,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool _isSigning = false;
   final AuthService _auth = AuthService();
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
@@ -180,7 +175,11 @@ class _LoginPageState extends State<LoginPage> {
           message: "User is successfully signed in",
           type: ToastType.success
       );
-      Navigator.pop(context);
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => CarListScreen()),
+            (route) => false,
+      );
     } else {
       showToast(
           message: "Some error occurred",

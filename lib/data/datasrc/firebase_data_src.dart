@@ -15,16 +15,4 @@ class FirebaseDataSource {
     await firestore.collection('booking_info').add(bookingInfo.toMap());
   }
 
-  // // Add user methods
-  // Future<void> saveUser(String uid, User user) async {
-  //   await firestore.collection('users').doc(uid).set(user.toMap());
-  // }
-  //
-  // Future<User?> getUser(String uid) async {
-  //   final doc = await firestore.collection('users').doc(uid).get();
-  //   if (doc.exists) {
-  //     return User.fromMap(doc.data()!);
-  //   }
-  //   return null;
-  // }
 }

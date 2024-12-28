@@ -11,8 +11,16 @@ class BookingHistoryPage extends StatelessWidget {
     if (currentUser == null) {
       return Scaffold(
         backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: Text('Booking History'),
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          elevation: 0,
+        ),
         body: Center(
-          child: Text('Please login to view booking history', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),),
+          child: Text('Please login to view booking history',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+          ),
         ),
       );
     }
@@ -43,7 +51,6 @@ class BookingHistoryPage extends StatelessWidget {
             return Center(child: Text('No booking history found'));
           }
 
-          // Sort the documents in memory instead
           final docs = snapshot.data!.docs.toList()
             ..sort((a, b) {
               final aTime = DateTime.parse((a.data() as Map)['deliveryTime']);
@@ -59,6 +66,7 @@ class BookingHistoryPage extends StatelessWidget {
 
               return BookingHistoryCard(
                 bookingData: data,
+                documentId: doc.id,  // Pass the document ID
               );
             },
           );
@@ -67,4 +75,3 @@ class BookingHistoryPage extends StatelessWidget {
     );
   }
 }
-

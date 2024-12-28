@@ -192,12 +192,11 @@ class _MapsDetailsPageState extends State<MapsDetailsPage> {
     User? currentUser = FirebaseAuth.instance.currentUser;
 
     if (currentUser == null) {
-      // Nếu chưa đăng nhập, hiển thị thông báo và chuyển đến trang đăng nhập
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Please login to book a car')),
       );
 
-      // Chuyển đến trang đăng nhập
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => LoginPage()),
@@ -310,7 +309,6 @@ class _MapsDetailsPageState extends State<MapsDetailsPage> {
         return;
       }
 
-      // Lấy thông tin người dùng hiện tại
       User? currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser == null || currentUser.email == null) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -322,7 +320,7 @@ class _MapsDetailsPageState extends State<MapsDetailsPage> {
       final booking = BookingInfo(
         customerName: _nameController.text,
         phoneNumber: _phoneController.text,
-        email: currentUser.email!, // Thêm email của người dùng
+        email: currentUser.email!,
         deliveryTime: _selectedTime!,
         latitude: selectedLocation!.latitude,
         longitude: selectedLocation!.longitude,
